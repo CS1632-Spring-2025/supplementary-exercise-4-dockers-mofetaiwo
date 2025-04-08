@@ -51,7 +51,7 @@ public class D3Test {
   }
   @Test
   public void dEFECT1GREETACAT() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080");
     driver.manage().window().setSize(new Dimension(745, 934));
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
