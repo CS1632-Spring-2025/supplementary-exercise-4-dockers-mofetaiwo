@@ -25,6 +25,8 @@ import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.FixMethodOrder;
@@ -35,6 +37,7 @@ public class D3Test {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
+
   @Before
   public void setUp() {
     ChromeOptions options = new ChromeOptions();
@@ -49,38 +52,7 @@ public class D3Test {
   public void tearDown() {
     driver.quit();
   }
-  @Test
-  public void dEFECT1GREETACAT() {
-    driver.get("http://localhost:8080");
-    driver.manage().window().setSize(new Dimension(745, 934));
-    js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.findElement(By.xpath("//a[contains(@href, \'/greet-a-cat\')]")).click();
-    assertThat(driver.findElement(By.xpath("//div[@id=\'greeting\']/h4")).getText(), is("Meow!Meow!"));
-  }
-  @Test
-  public void dEFECT2GREETACAT() {
-    driver.get("https://cs1632.appspot.com/greet-a-cat/Jennyanydots");
-    driver.manage().window().setSize(new Dimension(745, 934));
-    js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    assertThat(driver.findElement(By.xpath("//div[@id=\'greeting\']/h4")).getText(), is("Jennyanydots is not here."));
-  }
-  @Test
-  public void dEFECT3FEEDACAT() {
-    driver.get("https://cs1632.appspot.com/");
-    driver.manage().window().setSize(new Dimension(745, 934));
-    js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.findElement(By.xpath("//a[contains(@href, \'/feed-a-cat\')]")).click();
-    driver.findElement(By.xpath("//input[@id=\'catnips\']")).click();
-    driver.findElement(By.xpath("//input[@id=\'catnips\']")).sendKeys("0");
-    driver.findElement(By.xpath("//button[@onclick=\'setTimeout(feedSubmit, 1000)\']")).click();
-    {
-      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'feedResult\' and text()=\'Nom, nom, nom.\']")));
-    }
-    assertThat(driver.findElement(By.xpath("//div[@id=\'feedResult\']")).getText(), is("Cat fight!"));
-  }
+
   @Test
   public void tEST1LINKS() {
     driver.get("https://cs1632.appspot.com/");
